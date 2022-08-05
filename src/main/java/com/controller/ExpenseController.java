@@ -67,7 +67,7 @@ public class ExpenseController {
 
 			int acid = Integer.parseInt(expense.getTypeOfPayment());
 			int fAm = 0;
-			boolean flag = false;
+			//boolean flag = false;
 			for (int i = 0; i < account.size(); i++) { //
 
 				if (acid == account.get(i).getAcId() && expense.getAmmount() < account.get(i).getAmmount()) {
