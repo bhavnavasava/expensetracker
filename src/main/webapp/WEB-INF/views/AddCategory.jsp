@@ -9,6 +9,7 @@
 <title>Category</title>
 </head>
 <body>
+
 	<s:form action="savecategory" method="post" modelAttribute="category">
 		Category :<s:input path="category" /><br><br>
 		<input type="submit" value="save category">

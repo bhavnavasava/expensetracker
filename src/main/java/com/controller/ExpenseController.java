@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bean.AccountBean;
 import com.bean.CategoryBean;
 import com.bean.ExpenseBean;
+import com.bean.SubCategoryBean;
 import com.bean.UserBean;
 import com.dao.AccountDao;
 import com.dao.CategoryDao;
@@ -34,7 +35,8 @@ public class ExpenseController {
 	AccountDao accountDao;
 
 	@GetMapping("/expense")
-	public String expense(ExpenseBean expense, Model model, CategoryBean category, HttpSession session) {
+	public String expense(ExpenseBean expense, Model model, CategoryBean category, HttpSession session,
+			SubCategoryBean subCategory) {
 		UserBean user = (UserBean) session.getAttribute("user");
 		int userId = user.getUserId();
 		List<CategoryBean> categories = categoryDao.getAllCategory(userId);
@@ -42,6 +44,9 @@ public class ExpenseController {
 		model.addAttribute("expense", expense);
 		List<AccountBean> acTypes = accountDao.getAcType(user.getUserId());
 		model.addAttribute("acTypes", acTypes);
+		List<SubCategoryBean> subCategories = categoryDao.getAllSubCategoryByUser(userId);
+		model.addAttribute("subCategories", subCategories);
+		
 		return "AddExpense";
 	}
 
@@ -57,36 +62,44 @@ public class ExpenseController {
 		} else {
 
 			model.addAttribute("message", "added");
-			// expenseBean.setUserId(userBean.getUserId());
-			// System.out.println(expenseBean.getCategoryName());
-			// System.out.println(expenseBean.getTypeOfPayment());
 
 			List<AccountBean> account = accountDao.getAccountDetails(userId);
 			System.out.println("get type  " + account.get(0).getAcType());
 			System.out.println("get ammount in expense controller" + account.get(0).getAmmount());
 
-			int acid = Integer.parseInt(expense.getTypeOfPayment());
 			int fAm = 0;
-			//boolean flag = false;
+
+			boolean flag = false;
 			for (int i = 0; i < account.size(); i++) { //
 
-				if (acid == account.get(i).getAcId() && expense.getAmmount() < account.get(i).getAmmount()) {
-					fAm = account.get(i).getAmmount() - expense.getAmmount();
-
+				if (expense.getTypeOfPayment().contentEquals(account.get(i).getAcType())) {
+					System.out.println("expense controller " + expense.getTypeOfPayment());
+					System.out.println("expense controller " + account.get(i).getAcType());
 					int acId = account.get(i).getAcId();
-					accountDao.updatedfAm(acId, fAm); //
-					expenseDao.addExpense(expense, userId); // return "CustomerHome"; flag = true;
+
+					if (expense.getAmmount() < account.get(i).getAmmount()) {
+						fAm = account.get(i).getAmmount() - expense.getAmmount();
+						accountDao.afetrExpenseAdded(userId, fAm, acId);
+
+					} else {
+						flag = true;
+					}
+
+				} else {
+					flag = true;
 				}
-			}
 
-			if (user.getUserType().contentEquals("customer")) {
+			} // for
+
+			if (flag) {
+				expenseDao.addExpense(expense, userId);
 				return "Home";
-			} else {
-				return "AdminHome";
-			}
 
-			// expenseDao.addExpense(expenseBean,userId);
-			// return "CustomerHome";
+			} else {
+				System.out.println("somethin went wrong in add expense");
+				model.addAttribute("msg", "Insufficient Ammount in Your Account");
+				return "AddExpense";
+			}
 		}
 	}
 

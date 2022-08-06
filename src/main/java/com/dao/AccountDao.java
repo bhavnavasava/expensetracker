@@ -82,4 +82,8 @@ public class AccountDao {
 		stmt.update("update aacount set ammount=? where acid=?", acId);
 	}
 
+	public void afetrExpenseAdded(int userId, int fAm,int acId) {
+		stmt.update("update account set ammount=? where userid=? and acid=?",fAm,userId,acId);
+	}
+
 }

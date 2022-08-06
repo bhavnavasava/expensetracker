@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="Navbar.jsp"></jsp:include>
+
 	<form action="saveammount?acId=${acId}" method="post">
 	Enter Amount:	<input type="text" name="ammount"> <br><br>
 		<input type="submit">

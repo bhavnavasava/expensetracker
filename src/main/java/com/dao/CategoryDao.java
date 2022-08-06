@@ -17,32 +17,46 @@ public class CategoryDao {
 
 	@Autowired
 	JdbcTemplate stmt;
-	
-	public void addCategory(CategoryBean category) {	
-		stmt.update("insert into category (category,userid) values(?,?)", category.getCategory(),category.getUserId());
+
+	public void addCategory(CategoryBean category) {
+		stmt.update("insert into category (category,userid) values(?,?)", category.getCategory(), category.getUserId());
 	}
-	
+
 	public List<CategoryBean> getAllCategory(int userId) {
-		return stmt.query("select * from category where userid=1 or userid=?", new BeanPropertyRowMapper<CategoryBean>(CategoryBean.class),new Object[] {userId});
+		return stmt.query("select * from category where userid=1 or userid=?",
+				new BeanPropertyRowMapper<CategoryBean>(CategoryBean.class), new Object[] { userId });
 	}
-	
+
 	public List<CategoryBean> getAllCategories() {
 		return stmt.query("select * from category ", new BeanPropertyRowMapper<CategoryBean>(CategoryBean.class));
 	}
 
 	public void addSubCategory(SubCategoryBean subCategory) {
-		stmt.update("insert into subcategory (subcategory,cid,userid) values(?,?,?)", subCategory.getSubCategory(),subCategory.getcId(),subCategory.getUserId());
-	}
-
-	public List<SubCategoryBean> getAllSubCategory(SubCategoryBean subCategory) {
-			return stmt.query("select * from subcategory", new BeanPropertyRowMapper<SubCategoryBean>(SubCategoryBean.class));
+		stmt.update("insert into subcategory (subcategory,cid,userid) values(?,?,?)", subCategory.getSubCategory(),
+				subCategory.getcId(), subCategory.getUserId());
 	}
 	
+	
+	
+	
+	
+
+	public List<SubCategoryBean> getAllSubCategory(SubCategoryBean subCategory) {
+		return stmt.query("select * from subcategory",
+				new BeanPropertyRowMapper<SubCategoryBean>(SubCategoryBean.class));
+	}
+
+	public List<SubCategoryBean> getAllSubCategoryByUser(int cId) {
+		return stmt.query("select * from subcategory where cid=?",
+				new BeanPropertyRowMapper<SubCategoryBean>(SubCategoryBean.class), new Object[] { cId });
+	}
+
 	public List<SubCategoryBean> getSubCategory(int cId) {
-		return stmt.query("select * from subcategory where cid=?", new BeanPropertyRowMapper<SubCategoryBean>(SubCategoryBean.class),new Object[] {cId});
-}
+		return stmt.query("select * from subcategory where cid=?",
+				new BeanPropertyRowMapper<SubCategoryBean>(SubCategoryBean.class), new Object[] { cId });
+	}
 
 	public void deleteCategory(int cId) {
-		stmt.update("delete  from category where cid=?",cId);
+		stmt.update("delete  from category where cid=?", cId);
 	}
 }

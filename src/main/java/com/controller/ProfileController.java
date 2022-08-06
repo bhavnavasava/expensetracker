@@ -52,8 +52,8 @@ public class ProfileController {
 		UserBean user=(UserBean) session.getAttribute("user");
 		int userId=user.getUserId();
 		List<ProfileBean> profile=profileDao.getAllProfiles(userId);
-		System.out.println(profile);
 		model.addAttribute("profile",profile);
+		System.out.println(profile);
 		return "ListAllImages";
 		
 	}

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bean.AccountBean;
+import com.bean.CategoryBean;
 import com.bean.ExpenseBean;
 import com.bean.UserBean;
 
@@ -22,6 +23,14 @@ public class ExpenseDao {
 				 expense.getDate(), expense.getTypeOfPayment(), expense.getUserId(),
 				expense.getAmmount(),expense.getcId(),expense.getSubCategoryId());
 	}
+	
+	
+	
+	public List<ExpenseBean> getCategoryByAmmount(ExpenseBean expense) {
+		return stmt.query("select c.category ,sum(e.ammount) as total from expense e,category c where e.cid=c.cid group by c.category",
+				new BeanPropertyRowMapper<ExpenseBean>(ExpenseBean.class));
+		
+		}
 
 	public List<ExpenseBean> getAllExpense(int userId) {
 		return stmt.query("select * from expense where userid=?",

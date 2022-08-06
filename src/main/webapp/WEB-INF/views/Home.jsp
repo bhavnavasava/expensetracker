@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +10,27 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<jsp:include page="AllCss.jsp"></jsp:include>
-
+	
+<%-- <jsp:include page="AllCss.jsp"></jsp:include>
+ --%><style type="text/css">
+	img {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+		</style>
 </head>
 <body>
-	<div class="nav-header">
+	<!-- <div class="nav-header">
 		<h2>Expense Tracker</h2>
-	</div>
-	<div class="header">
+	</div> -->
+	<!-- <div class="header">
 		<div class="header-content">
 			<nav class="navbar navbar-expand">
 				<div class="collapse navbar-collapse justify-content-between">
 					<div class="header-left"></div>
 					<ul class="navbar-nav header-right main-notification">
-
-
 						<li class="nav-item dropdown header-profile"><a
 							class="nav-link" href="#" role="button" data-toggle="dropdown">
 								<img src="images\2\33e0a8de-c30c-4bbd-b357-7d3d53b6dfe5.jpg"
@@ -36,11 +43,12 @@
 				</div>
 			</nav>
 		</div>
-	</div>
+	</div> -->
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<br>
 	<br>
-
+		
+		
 	<div class="col-6">
 		<a href="expense" type="submit" class="btn btn-outline-primary">Add
 			Expense</a> <br> <br>
@@ -60,10 +68,21 @@
 	</div>
 
 	<a href="newprofile">New Profile</a>
-		<a href="getaccountdetail">View Account Details</a>
+	<a href="getaccountdetail">View Account Details</a>
 	
+			<a href="mychart">View Chart</a>
+		
+	<div class="col-6">
+		<a href="listallproflesimages" button type="submit"
+			class="btn btn-outline-warning">View All Profiles</a> <br> <br>
+	</div>
 
-	<jsp:include page="AllJs.jsp"></jsp:include>
+<%-- 	<jsp:include page="AllJs.jsp"></jsp:include>
+ --%>	
+	
+	
+	
+	
 
 </body>
 </html>

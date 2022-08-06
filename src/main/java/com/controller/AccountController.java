@@ -79,28 +79,11 @@ public class AccountController {
 		
 		System.out.println("actypes"+ acTypes);
 		
-		System.out.println(accounts);
+		//System.out.println(accounts);
 		// accounts.add(account);
 		for (int i = 0; i < accounts.size(); i++) {
 			System.out.println("account type " + accounts.get(i).getAcType());
 
-			/*
-			 * if (accounts.get(i).getAcType().contentEquals("cash")) { List<AccountBean>
-			 * cashAcType = accountDao.getAccountDetailsOfCash(userId);
-			 * model.addAttribute("cashAcType", cashAcType); }
-			 * 
-			 * if (account.getAcType().contentEquals("creditcard")) { List<AccountBean>
-			 * creditCardAcType = accountDao.getAccountDetailsOfCreditCard(userId);
-			 * model.addAttribute("creditCardAcType", creditCardAcType); }
-			 * 
-			 * if (account.getAcType().contentEquals("debitcard")) { List<AccountBean>
-			 * debitCardAcType = accountDao.getAccountDetailsOfDebitCard(userId);
-			 * model.addAttribute("debitCardAcType", debitCardAcType); }
-			 * 
-			 * if (account.getAcType().contentEquals("paytm")) { List<AccountBean>
-			 * payTmAcType = accountDao.getAccountDetailsOfPayTm(userId);
-			 * model.addAttribute("payTmAcType", payTmAcType); }
-			 */
 			
 			
 			List<AccountBean> cashAcType = accountDao.getAccountDetailsOfCash(userId);
@@ -119,14 +102,15 @@ public class AccountController {
 		// plus-minus
 
 		int total = 0;
+		
 		List<AccountBean> ac = accountDao.sum(userId);
-		System.out.println("account " + ac.get(0).getAmmount());
+		System.out.println("account for account controller " + ac.get(0).getAmmount());
 
 		List<ExpenseBean> expense = expenseDao.sum(userId);
-		System.out.println("expense " + expense.get(0).getAmmount());
-
-		total = ac.get(0).getAmmount() - expense.get(0).getAmmount();
-			
+		System.out.println("expense account controller" + expense.get(0).getAmmount());
+		
+		//total = ac.get(0).getAmmount() - expense.get(0).getAmmount();
+		total=	ac.get(0).getAmmount();
 		//model.addAttribute("ac",ac);
 		model.addAttribute("total",total);
 		System.out.println(total);

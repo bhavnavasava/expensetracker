@@ -66,6 +66,9 @@ public class CategoryController {
 		// category.setUserId(user.getUserId());
 		List<CategoryBean> categories = categoryDao.getAllCategories();
 		model.addAttribute("categories", categories);
+		
+		
+		
 		return "ListGategory";
 	}
 	

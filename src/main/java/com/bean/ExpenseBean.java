@@ -6,11 +6,20 @@ public class ExpenseBean {
 	String category;
 	String date;
 	String typeOfPayment;
+	Integer userId;
+	Integer total;
+	Integer ammount;
 	Integer cId;
 	Integer subCategoryId;
 	String subCategory;
 	Integer cardNo;
 	
+	public Integer getTotal() {
+		return total;
+	}
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
 	public Integer getCardNo() {
 		return cardNo;
 	}
@@ -35,8 +44,6 @@ public class ExpenseBean {
 	public void setcId(Integer cId) {
 		this.cId = cId;
 	}
-	Integer userId;
-	Integer ammount;
 	
 	public Integer getAmmount() {
 		return ammount;

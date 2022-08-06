@@ -1,8 +1,7 @@
-<%@page import="com.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@page import="com.bean.UserBean"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
@@ -24,6 +23,7 @@
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<br>
 	<s:form action="saveexpense" method="post" modelAttribute="expense">
+	
 	Category : <s:select path="cId" id="category">
 			<c:forEach items="${categories}" var="c">
 				<s:option value="${c.cId }">${c.category}</s:option>
@@ -41,16 +41,17 @@
 		<br>
 		
 		
+		
+		
 		Date:<s:input path="date" type="date" />
 		<s:errors path="date"></s:errors>
 		<br>
 		<br>
 		
-		
-	
+			
 	Payment Type:<s:select path="typeOfPayment" id="typeOfPayment">
 			<c:forEach items="${acTypes}" var="a">
-				<s:option value="${a.acType}">${a.acType}</s:option>
+				<s:option value="${a.acType}/${a.cardNo}">${a.acType}</s:option>
 
 			</c:forEach>
 		</s:select>
@@ -64,6 +65,8 @@
 
 		<input type="submit">
 	</s:form>
+	
+	${msg}
 
 	<script>
 		$(document)
@@ -75,6 +78,7 @@
 												var id = document
 														.getElementById("category").value;
 												let url = "http://localhost:9898/subcategories?cId="
+													//let url = "http://localhost:9898/subcategories?cId="
 														+ id;
 
 												$

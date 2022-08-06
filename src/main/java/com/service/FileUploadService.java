@@ -13,7 +13,7 @@ public void imgUpload(MultipartFile file,int userId) {
 		
 		
 		try {
-			String mainPath="C:\\Users\\JYOTI VASAVA\\Documents\\workspace-spring-tool-suite-4-4.13.1.RELEASE\\exp-tracker\\src\\main\\resources\\static\\images";
+			String mainPath="C:\\Users\\JYOTI VASAVA\\Documents\\workspace-spring-tool-suite-4-4.13.1.RELEASE\\exp-tracker\\src\\main\\webapp\\resources\\images";
 			File folder=new File(mainPath,userId+"");
 			folder.mkdir();
 			File newFile=new File(folder,file.getOriginalFilename());
