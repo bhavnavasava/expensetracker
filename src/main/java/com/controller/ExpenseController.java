@@ -46,7 +46,7 @@ public class ExpenseController {
 		model.addAttribute("acTypes", acTypes);
 		List<SubCategoryBean> subCategories = categoryDao.getAllSubCategoryByUser(userId);
 		model.addAttribute("subCategories", subCategories);
-		
+
 		return "AddExpense";
 	}
 
@@ -68,10 +68,8 @@ public class ExpenseController {
 			System.out.println("get ammount in expense controller" + account.get(0).getAmmount());
 
 			int fAm = 0;
-
 			boolean flag = false;
 			for (int i = 0; i < account.size(); i++) { //
-
 				if (expense.getTypeOfPayment().contentEquals(account.get(i).getAcType())) {
 					System.out.println("expense controller " + expense.getTypeOfPayment());
 					System.out.println("expense controller " + account.get(i).getAcType());
@@ -80,15 +78,12 @@ public class ExpenseController {
 					if (expense.getAmmount() < account.get(i).getAmmount()) {
 						fAm = account.get(i).getAmmount() - expense.getAmmount();
 						accountDao.afetrExpenseAdded(userId, fAm, acId);
-
 					} else {
 						flag = true;
 					}
-
 				} else {
 					flag = true;
 				}
-
 			} // for
 
 			if (flag) {
